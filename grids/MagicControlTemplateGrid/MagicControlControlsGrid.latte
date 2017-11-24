@@ -1,0 +1,16 @@
+<table class="table table-bordered table-striped table-hover">
+    <thead class="header">
+        <tr>
+            <th class="header-cell header-cell-magic_control">Komponenty</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="body">
+    {foreach $controls as $name => $values}
+        <tr>
+            <td class="body-cell body-cell-magic_control">{$name}</td>
+            <td class="body-cell body-cell-magic_control"><a href="{plink create, $name}"><i style="font-size: x-large" class="fa fa-plus-circle" title="vytvořit šablonu pro {$name}"></i></a></td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>

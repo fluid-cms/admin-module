@@ -1,0 +1,1 @@
+ALTER TABLE `admin_user` ADD `rules` VARCHAR(255) NOT NULL DEFAULT '["homepage", "user"]' AFTER `role`;

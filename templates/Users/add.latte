@@ -1,0 +1,44 @@
+{block content}
+	<h1 class="page-header">
+		{block title}
+			Nový uživatel
+		{/block}
+	</h1>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-primary">
+				<div class="panel-body">
+					{control userForm}
+				</div>
+			</div>
+		</div>
+	</div>
+{/block}
+
+{block scripts}
+	<script>
+		$.nette.ext('role-selectbox', {
+			success: function () {
+
+				function checkRole() {
+					$('[name="inline[values][role]"] option:selected').each(function () {
+						var role = $(this).text();
+
+						if (role === "admin") {
+							$('input[name="inline[values][rules][]"]').attr("disabled", true).attr("title", "Nastavená role již veškerá práva obsahuje!");
+						} else {
+							$('input[name="inline[values][rules][]"]').removeAttr("disabled").removeAttr("title");
+						}
+					});
+				}
+
+				$('[name="inline[values][role]"]').change(function () {
+					checkRole();
+				});
+
+				checkRole();
+			}
+		});
+	</script>
+{/block}

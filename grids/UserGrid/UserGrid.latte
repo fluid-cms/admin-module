@@ -1,0 +1,66 @@
+{extends $defaultTemplate}
+
+{define body-cell-name}
+    <td n:class="$record->email == '' ? 'info'">
+        <i class="fa fa-user fa-fw"></i> {$record->name}
+    </td>
+{/define}
+
+{define body-cell-rules}
+    <td n:class="$record->email == '' ? 'info'">
+        {var $rules = json_decode($record->rules, true)}
+        {if $record->role == 'admin'}
+            <span class="text-success" data-toggle="tooltip" title="Upravte tohoto uživatele pro vytvoření přístupu.">
+                <i class="fa fa-check fa-fw"></i> Uživatel má veškerá práva
+            </span>
+        {elseif !is_array($rules) || empty($rules)}
+            <span class="text-danger">
+                <i class="fa fa-exclamation-circle"></i> Uživatel nemá nastaven žádný přístup
+            </span>
+        {else}
+            <ul class="list-group m-b-0" n:inner-foreach="$rules as $rule">
+                <li class="list-group-item p-t-5 p-b-5">
+                    {_'access.' . $rule}
+                </li>
+            </ul>
+        {/if}
+    </td>
+{/define}
+
+{define body-cell-role}
+    <td n:class="$record->email == '' ? 'info'">
+        {$record->role}
+    </td>
+{/define}
+
+{define body-cell-email}
+    <td n:class="$record->email == '' ? 'info'">
+        {$record->email}
+    </td>
+{/define}
+
+{define body-cell-password}
+    <td n:class="$record->email == '' ? 'info', 'text-center'">
+        <i class="fa fa-lock fa-2x" data-toggle="tooltip" title="Hesla jsou tajná!<br /> Každopádně je možné je uživatelům měnit."></i>
+    </td>
+{/define}
+
+{define body-cell-photo}
+    <td style="padding: 2px">
+        <img n:if="$record->photo" {if substr($record->photo, 0, 4) === "http"} src="{$record->photo}" {else} src="{$basePath}{$record->photo}" {/if} style="height:46px" class="center-block img-responsive">
+    </td>
+{/define}
+
+{define row-action-edit}
+    <a href="{$link}" class="btn btn-primary btn-xs" data-toggle="tooltip" title="Upravit">
+        <i class="fa fa-pencil"></i>
+    </a>
+{/define}
+
+{define row-action-delete}
+    {if $record->id != $user->id}
+        <a href="{$link}" class="btn btn-danger btn-xs tw-ajax" data-ajax="on" data-confirm="Opravdu chcete uživatele smazat?" data-toggle="tooltip" title="Smazat">
+            <i class="fa fa-times"></i>
+        </a>
+    {/if}
+{/define}

@@ -1,0 +1,138 @@
+parameters:
+	routing:
+		admin:
+			- ['admin/<presenter>/<action>[/<id>]', 'Homepage:default']
+
+	backend:
+		auth: # seznam nastavitelnych autorizacnich oblasti
+			homepage: 'homepage'
+			setting: 'setting'
+			user: 'user'
+			users: 'users'
+			magicControlTemplate: 'magicControlTemplate'
+		menu:
+			Nástěnka:
+				order: 1
+				icon: 'dashboard'
+				auth: '%backend.auth.homepage%' # pokud ma uzivatel prava do sekce 'homepage', pak se zobrazi v menu
+				link: ':Admin:Homepage:default'
+			Správa uživatelů:
+				order: 45
+				icon: 'users'
+				class: menu-warning
+				auth: '%backend.auth.users%'
+				link: ':Admin:Users:default'
+			Šablony komponent:
+				order: 49
+				icon: 'file-text-o'
+				class: menu-warning
+				auth: '%backend.auth.magicControlTemplate%'
+				link: ':Admin:MagicControlTemplate:default'
+				selected:
+					- ':Admin:MagicControlTemplate:.*'
+			Nastavení:
+				order: 50
+				icon: 'cogs'
+				class: menu-danger
+				auth: '%backend.auth.setting%'
+				link: ':Admin:Setting:default'
+
+services:
+	imageUploader: Grapesc\GrapeFluid\AdminModule\Services\ImageUploader
+	- Grapesc\GrapeFluid\AdminModule\LoginForm
+	- Grapesc\GrapeFluid\AdminModule\UserForm
+	- Grapesc\GrapeFluid\AdminModule\MagicControlTemplateForm
+	- Grapesc\GrapeFluid\AdminModule\Model\UserModel
+	- Grapesc\GrapeFluid\AdminModule\ComponentListControl\IComponentListControlFactory
+	- implement: Grapesc\GrapeFluid\AdminModule\MenuControl\IMenuControlFactory
+	  arguments: [%backend.menu%]
+
+
+fluid:
+	security:
+		backend:
+			roles: [admin, superuser]
+			authenticator: Grapesc\GrapeFluid\AdminModule\Services\UserAuthenticator
+			authorizator: Grapesc\GrapeFluid\AdminModule\Services\UserAuthorizator
+
+assets:
+	admin:
+		limit:
+			- ':Admin:.*'
+		css:
+			- 'https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css'
+			- '%moduleDir%/AdminModule/assets/main.css'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css'
+		js:
+			- 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'
+			- '%moduleDir%/AdminModule/assets/bridge.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js'
+			- '%moduleDir%/AdminModule/assets/menu.js'
+			- '%moduleDir%/AdminModule/assets/confirm.js'
+			- '%moduleDir%/AdminModule/assets/bar.js'
+		copy:
+			- '%moduleDir%/AdminModule/assets/fonts/*'
+
+	twigrid:
+		limit:
+			- ':Admin:.*'
+		css:
+			- '%vendorDir%/uestla/twigrid/assets/twigrid.datagrid.css'
+		js:
+			- '%vendorDir%/uestla/twigrid/assets/twigrid.datagrid.js'
+
+	summer:
+		limit:
+			# [link limit, auth limit - (pokud ma uzivatel pristup k resource 'auth' (tedy 'homepage') nebo je admin]
+#			- ['link' = ':Admin:.*', 'auth' = 'backend:homepage']
+			- ':Admin:.*'
+		js:
+			- 'https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/lang/summernote-cs-CZ.min.js'
+			- '%moduleDir%/AdminModule/assets/fluidnote.js'
+		css:
+			- 'https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css'
+
+	codemirror:
+		limit:
+			- ':Admin:MagicControlTemplate:.*'
+		js:
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/xml/xml.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/javascript/javascript.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/css/css.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/htmlmixed/htmlmixed.min.js'
+			- '%moduleDir%/AdminModule/assets/codemirror/latte.js'
+			- '%moduleDir%/AdminModule/assets/codemirror/codemirror.js'
+		css:
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.min.css'
+
+	datetimepicker:
+		limit:
+			- ':Admin:.*'
+		css:
+			- 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'
+		js:
+			- 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js'
+			- '%moduleDir%/AdminModule/assets/datetimepicker.js'
+
+	select:
+		limit:
+			- ':Admin:.*'
+		css:
+			- 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css'
+		js:
+			- 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-cs_CZ.min.js'
+			- '%moduleDir%/AdminModule/assets/select.js'
+
+	# @todo: @deprecated - remove in next version
+#	multiselect:
+#		limit:
+#			- ':Admin:.*'
+#		css:
+#			- 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css'
+#		js:
+#			- 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js'
+#			- '%moduleDir%/AdminModule/assets/multiselect.js'

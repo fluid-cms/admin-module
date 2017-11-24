@@ -1,0 +1,1 @@
+ALTER TABLE `admin_user` CHANGE `rules` `rules` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_czech_ci NOT NULL DEFAULT '[]';

@@ -1,0 +1,150 @@
+{block content}
+    <style>
+        table.table-middle > tbody > tr > td {
+            vertical-align: middle !important;
+        }
+    </style>
+{snippet settingForm}
+    {form settingForm}
+
+        <h1 class="page-header">
+            <i class="fa fa-cogs fa-fw"></i> {block title}Nastavení{/block}
+            <span class="button-area">
+                {input save class => 'ajax btn btn-primary'}
+            </span>
+        </h1>
+
+        <div class="panel panel-default">
+
+            <ul class="nav nav-tabs nav-tabs-border">
+                {foreach $form->components as $module => $input}
+                    {if $input instanceof Nette\Forms\Container}
+                        {php $class = null}
+
+                        {if empty($form->getErrors())}
+                            {if ($focusElement && isset($input[str_replace(".", "_", $focusElement)])) || $showTab == ($module|lower)}
+                                {* pokud nema formular chyby, pak nas zajimaji parametry *}
+                                {php $class = "active"}
+                            {elseif $iterator->isFirst() && !($focusElement || $showTab)}
+                                {* jinak nastavime jako vychozi prvni container *}
+                                {php $class = "active"}
+                            {/if}
+                        {/if}
+
+                        {* pokud ma container nejakou chybu, je automaticky aktivni *}
+                        {if !empty($input->getErrors())}
+                            {php $class = "active bg-warning"}
+                        {/if}
+
+                        {if $class}
+                            {php $activeModule = ($module|lower)}
+                        {/if}
+
+                        <li class="{$class}"><a data-toggle="tab" href="#{$module}">{$module}</a></li>
+                    {/if}
+                {/foreach}
+            </ul>
+
+            <div class="tab-content">
+                {foreach $form->components as $module => $input}
+                    <div n:if="$input instanceof Nette\Forms\Container" id="{$module}" n:class="'tab-pane', isset($activeModule) ? ($module|lower) == $activeModule : $iterator->isFirst() ? 'in active'">
+                        {if isset($form[$module])}
+                            <div class="table-responsive">
+                                <table class="table table-hover table-responsive table-middle">
+                                    <thead>
+                                    <tr>
+                                        <th>Proměnná</th>
+                                        <th>Aktuální hodnota</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr n:foreach="$form[$module]->components as $name => $subinput" n:class="$subinput->hasErrors() ? warning, $subinput->caption == $focusElement ? success">
+                                        <td style="width: 25%">
+                                            {label $subinput, class => "f-700 f-14"}
+
+                                            {ifset $subinput->control->attrs['data-secured']}
+                                                <i class="fa fa-key fa-fw" title="Hodnota je zašifrovaná"></i>
+                                            {/ifset}
+
+                                            {if $subinput->isRequired()}
+                                                <span class="text-danger f-16" title="Toto pole je povinné" data-toggle="tooltip">*</span>
+                                            {/if}
+
+                                            {if $subinput->control->attrs['data-description']}
+                                                <br />
+                                                {$subinput->control->attrs['data-description']}
+                                            {/if}
+                                            <div class="p-t-5">
+                                                <i>Výchozí hodnota: {$subinput->control->attrs['data-default']}</i>
+                                                <a tabindex="-1" href="#" data-confirm="Opravdu chcete obnovit tuto hodnotu?" data-callback="recoverValue">
+                                                    <i class="fa fa-reply fa-fw" data-toggle="tooltip" title="Obnovit výchozí hodnotu (neprovede uložení)"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div n:class="form-group, $subinput->hasErrors() ? 'has-error'">
+                                                {input $subinput, class => 'form-control'}
+
+                                                {if $subinput->hasErrors()}
+                                                    {foreach $subinput->getErrors() as $error}
+                                                        <span class="text-danger">{$error}</span><br/>
+                                                    {/foreach}
+                                                {/if}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        {else}
+                            <p>Tento modul nemá žádná nastavení</p>
+                        {/if}
+                    </div>
+                {/foreach}
+            </div>
+        </div>
+
+    {/form}
+{/snippet}
+
+<script type="text/javascript">
+
+    window.confirm.recoverValue = function (element) {
+        var input = $(element).closest("tr").find(".form-control");
+        input.trigger('focus');
+        input.val(input.data('default'));
+        input.trigger('change');
+    };
+
+    document.addEventListener('DOMContentLoaded' , function () {
+        var focusElement = $('tr.success .form-control');
+
+        if (focusElement[0]) {
+            focusElement.focus();
+        }
+
+        $('body').on('change', '.form-control', function () {
+            var el = $(this);
+
+            if (el.val() == el.data('value')) {
+                el.parent().removeClass('has-warning');
+            } else {
+                el.parent().addClass('has-warning');
+            }
+        }).on('focus', '.form-control', function () {
+            var el = $(this);
+
+            if (typeof el.data('value') === "undefined") {
+                el.attr('data-value', el.val());
+            }
+        });
+
+        $.nette.ext('ajax', {
+           success: function( ) {
+               $('.has-error .form-control').focus();
+           }
+        });
+    });
+</script>
+
+{/block}

@@ -1,0 +1,13 @@
+{block content}
+    <h1 class="page-header">
+        {block title}Správa uživatelů{/block}
+        <span class="button-area">
+            <a n:href="add" class="btn btn-primary"><i class="fa fa-user-plus"></i> Vytvořit uživatele</a>
+        </span>
+    </h1>
+    <div class="row">
+        <div class="col-lg-12">
+            {control userGrid}
+        </div>
+    </div>
+{/block}

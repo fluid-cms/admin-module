@@ -1,0 +1,67 @@
+{if $modal}
+	<div class="modal fade" id="component-list" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Dostupné komponenty</h4>
+				</div>
+				<div class="modal-body">
+					{include list}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{else}
+	{include list}
+{/if}
+
+{define list}
+	<div class="table-responsive">
+		<table class="table table-hover table-striped">
+			<thead>
+			<tr>
+				<th class="text-info" data-toggle="tooltip" title="Při myší najetí na řádek komponenty se zobrazí její popis">
+					<i class="fa fa-info-circle fa-fw"></i>
+					Název
+				</th>
+				<th class="text-info" data-toggle="tooltip" title="Při najetí myší na řádek s parametrem se zobrazí jeho popis">
+					<i class="fa fa-info-circle fa-fw"></i>
+					Parametry
+				</th>
+				<th n:if="$showAppendButton">
+
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr n:foreach="$controls as $name => $options" data-toggle="tooltip" title="{$options['desc'] ?: 'Popis neuveden'}">
+				<td>{$name}</td>
+				<td>
+					{var $params = ""}
+					<ul class="list-group m-b-0" n:inner-foreach="$options['params'] as $param => $desc">
+						<li data-toggle="tooltip" title="{$desc[1] ?: 'Popis neuveden'}" data-placement="left" class="list-group-item p-5">
+							{$iterator->getCounter()} - {$param} (Typ - {$desc[0]})
+						</li>
+						{php $params .= $param . (!$iterator->isLast() ? ',' : '')}
+					</ul>
+				</td>
+				<td n:if="$showAppendButton">
+					<a href="#"
+					   data-toggle="tooltip"
+					   title="Vloží předpřipravené makro do Obsahu, kde se nachází kurzor."
+					   class="btn btn-primary btn-xs component-list-append"
+					   data-component-name="{$name}"
+					   data-component-parameters="{$params}">
+						Vložit
+					</a>
+				</td>
+				{php $params = ""}
+			</tr>
+			</tbody>
+		</table>
+	</div>
+{/define}

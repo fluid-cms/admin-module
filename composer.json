@@ -1,0 +1,20 @@
+{
+  "name": "fluid-cms/admin-module",
+  "keywords": ["fluid-cms", "grape-fluid", "cms", "nette"],
+  "type": "grape-fluid-module",
+  "license": "BSD-3-Clause",
+  "homepage": "https://github.com/fluid-cms/admin-module",
+  "authors": [
+    {
+      "name": "GRAPE SC, a.s.",
+      "email": "developers@grapesc.cz",
+      "homepage": "https://developers.grapesc.cz"
+    }
+  ],
+  "require": {
+    "php": ">= 5.6",
+    "grape-fluid/core-module": "@dev"
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev"
+}

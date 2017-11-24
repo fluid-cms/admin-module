@@ -1,0 +1,1 @@
+ALTER TABLE `admin_user` CHANGE `name` `name` varchar(80) COLLATE 'utf8_czech_ci' NOT NULL;

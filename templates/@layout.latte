@@ -1,0 +1,25 @@
+{block main}
+    <div id="wrapper">
+
+        {control menu}
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    {block content}{/block}
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+
+{block editor}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.form-summernote').fluidNote({
+                basePath: {$basePath},
+                uploadSignal: {link uploadImage!}
+            });
+        })
+    </script>
+{/block}

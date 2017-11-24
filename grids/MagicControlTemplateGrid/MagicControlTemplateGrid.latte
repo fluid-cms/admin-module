@@ -1,0 +1,25 @@
+{extends $defaultTemplate}
+
+{define row-action-edit}
+    <a href="{$link}" class="btn btn-primary btn-xs" data-toggle="tooltip" title="Upravit">
+        <i class="fa fa-pencil"></i>
+    </a>
+{/define}
+
+{define header-cell-magic_control}
+    <th>
+        Komponenta
+    </th>
+{/define}
+
+{define header-cell-template_name}
+    <th>
+        Název šablony
+    </th>
+{/define}
+
+{define row-action-delete}
+<a href="{$link}" class="btn btn-danger btn-xs tw-ajax" data-ajax="on" data-confirm="Opravdu chcete šablonu smazat?" data-toggle="tooltip" title="Smazat">
+    <i class="fa fa-times"></i>
+</a>
+{/define}

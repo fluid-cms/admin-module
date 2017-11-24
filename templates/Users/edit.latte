@@ -1,0 +1,55 @@
+{block content}
+	<h1 class="page-header">
+		{block title}
+			Úprava uživatele
+		{/block}
+	</h1>
+
+	<div class="row">
+		<div class="col-lg-10">
+			<div class="panel panel-primary">
+				<div class="panel-body">
+					{control userForm}
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2" n:if="$rowUser['photo']">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					Profilový obrázek:
+				</div>
+				<div class="panel-body">
+					<img {if substr($rowUser['photo'], 0, 4) === "http"} src="{$rowUser['photo']}" {else} src="{$basePath}{$rowUser['photo']}"{/if} class="center-block img-responsive">
+				</div>
+			</div>
+		</div>
+	</div>
+{/block}
+
+{block scripts}
+	<script>
+		$(document).ready(function () {
+			function checkRole() {
+				$('[name="role"] option:selected').each(function () {
+					var role = $(this).text();
+					var inputs = $('input[name="rules[]"]');
+					var parent = inputs.parents('.form-group');
+
+					if (role === "admin") {
+						inputs.attr("disabled", true);
+						parent.data('toggle', 'tooltip').attr("title", "Nastavená role již veškerá práva obsahuje!").tooltip();
+					} else {
+						inputs.removeAttr("disabled").removeAttr("title");
+						parent.tooltip('destroy');
+					}
+				});
+			}
+
+			$('[name="role"]').change(function () {
+				checkRole();
+			});
+
+			checkRole();
+		});
+	</script>
+{/block}

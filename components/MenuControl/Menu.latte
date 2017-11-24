@@ -1,0 +1,50 @@
+<nav class="navbar navbar-default navbar-fixed-top m-b-0" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class='navbar-brand' href="{plink ':Admin:Homepage:default'}"><i class="fa fa-spin fa-circle-o-notch fa-fw"></i> Grape-Fluid</a>
+    </div>
+
+    <div class="sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse collapse hidden-xs">
+            <a class='navbar-brand' href="{plink ':Admin:Homepage:default'}"><i class="fa fa-spin fa-circle-o-notch fa-fw"></i> Grape-Fluid</a>
+        </div>
+        <div class="sidebar-nav navbar-collapse collapse">
+            <ul class="nav" id="side-menu">
+                {foreach $menu as $name => $item}
+                    {if $user->isAllowed("backend:" . $item['auth'])}
+                        <li n:class="$item['active'] ? active, $item['active'] && !$item['subactive'] ? subactive, isset($item['class']) ? $item['class']">
+                            {if isset($item['submenu'])}
+                                <a href="#"><i class="fa fa-{isset($item['icon']) ? $item['icon'] : ''} fa-fw"></i> <span class="link-text">{$name} <span class="fa arrow"></span></span></a>
+                                <ul class="nav nav-second-level {$item['active'] ? "collapse in" : "collapse"}">
+                                {foreach $item['submenu'] as $subname => $subitem}
+                                    <li n:class="$subitem['active'] ? subactive">
+                                        <a href="{plink $subitem['link']}"><i class="fa fa-{isset($subitem['icon']) ? $subitem['icon'] : ''} fa-fw"></i> <span class="link-text">{$subname}</span></a>
+                                    </li>
+                                {/foreach}
+                                </ul>
+                            {else}
+                                <a href="{plink $item['link']}"><i class="fa fa-{$item['icon']} fa-fw"></i> <span class="link-text">{$name}</span></a>
+                            {/if}
+                        </li>
+                    {/if}
+                {/foreach}
+                <li>
+                    <a href="#"><i class="fa fa-user fa-fw"></i> <span class="link-text">{$user->identity->name} <span class="fa arrow"></span></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li n:if="$user->isAllowed('backend:user')">
+                            <a href="{plink ':Admin:User:default'}"><i class="fa fa-wrench fa-fw"></i> <span class="link-text">Nastavení účtu</span></a>
+                        </li>
+                        <li>
+                            <a href="{plink ':Admin:Sign:out'}"><i class="fa fa-sign-out fa-fw"></i> <span class="link-text">Odhlásit se</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
