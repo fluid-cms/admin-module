@@ -13,7 +13,7 @@
   ],
   "require": {
     "php": ">= 5.6",
-    "grape-fluid/core-module": "@dev"
+    "fluid-cms/core-module": "@dev"
   },
   "prefer-stable": true,
   "minimum-stability": "dev"
