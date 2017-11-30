@@ -137,7 +137,7 @@ class ImageUploader
 	 */
 	private function getUniqueName($fileName)
 	{
-		return microtime(true) . strtolower(preg_replace('/([A-Z]+)/', "-$1", urlencode($fileName)));;
+		return microtime(true) . strtolower(preg_replace('/([A-Z]+)/', "-$1", urlencode($fileName)));
 	}
 
 
