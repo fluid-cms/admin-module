@@ -1,6 +1,6 @@
 <?php
 
-namespace Grapesc\GrapeFluid\NewsFeedModule\Grid;
+namespace Grapesc\GrapeFluid\AdminModule\Grid;
 
 use Grapesc\GrapeFluid\FluidGrid;
 use Nette\Database\Table\ActiveRow;
@@ -9,7 +9,7 @@ use Nette\DI\Container as Context;
 
 /**
  * Class UserGrid
- * @package Grapesc\GrapeFluid\NewsFeedModule\Grid
+ * @package Grapesc\GrapeFluid\AdminModule\Grid
  * @model Grapesc\GrapeFluid\AdminModule\Model\UserModel
  */
 class UserGrid extends FluidGrid

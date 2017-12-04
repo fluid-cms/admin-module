@@ -3,13 +3,13 @@
 namespace Grapesc\GrapeFluid\AdminModule\Presenters;
 
 use Grapesc\GrapeFluid\AdminModule\UserForm;
+use Grapesc\GrapeFluid\AdminModule\Grid\UserGrid;
 use Grapesc\GrapeFluid\EventDispatcher;
 use Grapesc\GrapeFluid\FluidFormControl\FluidForm;
 use Grapesc\GrapeFluid\FluidFormControl\FluidFormControl;
 use Grapesc\GrapeFluid\FluidFormControl\FluidFormEvent;
 use Grapesc\GrapeFluid\FluidFormControl\FluidFormFactory;
 use Grapesc\GrapeFluid\FluidGrid\FluidGridFactory;
-use Grapesc\GrapeFluid\NewsFeedModule\Grid\UserGrid;
 use Nette\Database\Table\ActiveRow;
 
 
