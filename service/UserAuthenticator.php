@@ -8,7 +8,7 @@ use Nette\Database\Table\ActiveRow;
 use Nette\Security\Passwords;
 
 
-class UserAuthenticator extends Nette\Object implements Nette\Security\IAuthenticator
+class UserAuthenticator implements Nette\Security\IAuthenticator
 {
 
 	const
