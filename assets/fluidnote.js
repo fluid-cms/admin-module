@@ -43,7 +43,7 @@
 					trigger: 'manual',
 					animation: false,
 					content: '<div id="content-edit" class="btn btn-primary btn-block btn-inline-edit" onclick="$(\'#' + plugin.id + '\').fluidNote(\'initInlineSummernote\')">Upravit</div>',
-					template: '<div class="popover popover-inline" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+					template: '<div class="popover popover-inline" role="tooltip"><div class="arrow"></div><h3 class="popover-title popover-header"></h3><div class="popover-content popover-body"></div></div>'
 				}).on("mouseenter", function () {
 					plugin.$this.popover('show');
 					plugin.$this.addClass('hover');
@@ -259,7 +259,7 @@
 
 			var element = document.createElement("nav");
 			element.id = "navbar-inline";
-			element.className = "navbar navbar-inverse navbar-fixed-bottom navbar-inline bg-inverse fixed-bottom navbar-toggleable-md";
+			element.className = "navbar navbar-inverse navbar-fixed-bottom navbar-inline bg-inverse navbar-dark bg-dark fixed-bottom navbar-toggleable-md navbar-expand-lg";
 			element.innerHTML = navbar;
 
 			document.body.appendChild(element);
