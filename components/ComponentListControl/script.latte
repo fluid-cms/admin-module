@@ -10,30 +10,32 @@
 				$(selector).summernote('editor.insertText', "[%" + name + "(" + params + ")%]");
 			});
 
-			{if $modal}
-				$(selector).fluidNote({
-					custom: {
-						toolbar: [
-							['custom', ['component']]
-						],
-						buttons: {
-							component: function (context) {
-								var ui = $.summernote.ui;
+			$(selector).fluidNote({
+				basePath: {$basePath},
+				uploadSignal: {plink uploadImage!},
+				{if $modal}
+				custom: {
+					toolbar: [
+						['custom', ['component']]
+					],
+					buttons: {
+						component: function (context) {
+							var ui = $.summernote.ui;
 
-								var button = ui.button({
-									contents: '<i class="fa fa-wrench fa-fw"/>',
-									tooltip: 'Vložit komponentu',
-									click: function () {
-										$('#component-list').modal('show');
-									}
-								});
+							var button = ui.button({
+								contents: '<i class="fa fa-wrench fa-fw"/>',
+								tooltip: 'Vložit komponentu',
+								click: function () {
+									$('#component-list').modal('show');
+								}
+							});
 
-								return button.render();
-							}
+							return button.render();
 						}
 					}
-				});
-			{/if}
+				}
+				{/if}
+			});
 		} else {
 			throw "FluidNote - Summernote instance not found by using selector '" + selector + "'";
 		}
