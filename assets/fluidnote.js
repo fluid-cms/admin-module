@@ -109,7 +109,15 @@
 							e.preventDefault();
 							document.execCommand('insertText', false, bufferText);
 						}
+					},
+					onBlurCodeview: function () {
+						plugin.$this.val(plugin.$this.summernote('code'));
 					}
+				},
+				codemirror: {
+					lineNumbers: true,
+					mode: { name: "latte", baseMode: "text/html" },
+					theme: 'monokai'
 				}
 			}, plugin.settings.custom);
 
@@ -123,13 +131,6 @@
 			settings.buttons = buttons;
 
 			plugin.$this.summernote(settings);
-
-			$('.note-codable').on('blur', function () {
-				if (plugin.$this.summernote('codeview.isActivated')) {
-					plugin.$this.val(plugin.$this.summernote('code'));
-				}
-			});
-
 			plugin.checkUploadAvailable();
 		},
 		initInlineSummernote: function () {
