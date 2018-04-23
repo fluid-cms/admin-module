@@ -88,25 +88,27 @@ assets:
 #			- ['link' = ':Admin:.*', 'auth' = 'backend:homepage']
 			- ':Admin:.*'
 		js:
-			- 'https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.min.js'
-			- 'https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/lang/summernote-cs-CZ.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/lang/summernote-cs-CZ.min.js'
 			- '%moduleDir%/AdminModule/assets/fluidnote.js'
 		css:
-			- 'https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote.css'
 
 	codemirror:
+		order:
+			before: summer
 		limit:
-			- ':Admin:MagicControlTemplate:.*'
+			- ':Admin:.*'
 		js:
-			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.min.js'
-			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/xml/xml.min.js'
-			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/javascript/javascript.min.js'
-			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/css/css.min.js'
-			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/htmlmixed/htmlmixed.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/codemirror.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/mode/xml/xml.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/mode/javascript/javascript.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/mode/css/css.min.js'
 			- '%moduleDir%/AdminModule/assets/codemirror/latte.js'
 			- '%moduleDir%/AdminModule/assets/codemirror/codemirror.js'
 		css:
-			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.min.css'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/codemirror.min.css'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/theme/monokai.min.css'
 
 	datetimepicker:
 		limit:
