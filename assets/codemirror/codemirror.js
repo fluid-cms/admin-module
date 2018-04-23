@@ -4,7 +4,8 @@ $(function () {
     for (var i = 0; i < elements.length; i++) {
         CodeMirror.fromTextArea(elements[i], {
             lineNumbers: true,
-            mode: {name: "latte", baseMode: "text/html"}
+            mode: {name: "latte", baseMode: "text/html"},
+			theme: 'monokai'
         });
     }
 });
