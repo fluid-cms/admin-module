@@ -200,6 +200,7 @@
 					}
 				}
 			});
+			plugin.$this.siblings('.note-editor').find('.note-editable').addClass('note-editable-inline');
 		},
 		checkUploadAvailable: function () {
 			var plugin = this;
