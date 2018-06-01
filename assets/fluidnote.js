@@ -145,7 +145,7 @@
 
 					var button = ui.button({
 						contents: '<i class="fa fa-save fa-fw"/>',
-						tooltip: 'Uložit změny',
+						// tooltip: 'Uložit změny', @todo @tempfix
 						click: function () {
 							$.nette.ajax({
 								type: "POST",
