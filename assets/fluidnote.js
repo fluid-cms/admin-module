@@ -30,6 +30,7 @@
 			var plugin = this;
 
 			if (plugin.settings.inline) {
+				plugin.$this.addClass('note-editable-inline-wrapper');
 				plugin.$this.popover({
 					html: true,
 					container: 'body',
