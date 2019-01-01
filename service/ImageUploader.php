@@ -149,17 +149,9 @@ class ImageUploader
 	 */
 	private function checkAndCreateDir($uploadDir)
 	{
-		$dirs      = explode(DIRECTORY_SEPARATOR, $uploadDir);
-		$checkPath = '';
-
-		foreach ($dirs as $dir)
-		{
-			if ($dir && !is_dir($checkPath . $dir)) {
-				mkdir($checkPath . $dir);
-			}
-
-			$checkPath = $checkPath . $dir . '/';
-		}
+		if (!is_dir($uploadDir)) {
+			mkdir($uploadDir, 0777, true);
+                }
 	}
 
 
