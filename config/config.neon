@@ -72,8 +72,8 @@ assets:
 			- '%moduleDir%/AdminModule/assets/menu.js'
 			- '%moduleDir%/AdminModule/assets/confirm.js'
 			- '%moduleDir%/AdminModule/assets/bar.js'
-			- 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'
-			- 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/cs.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'
+			- 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/cs.js'
 		copy:
 			- [%moduleDir%/AdminModule/assets/fonts/*, %wwwDir%/components/admin/fonts]
 
