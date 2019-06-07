@@ -30,9 +30,4 @@ $(function () {
 			});
 		}
 	});
-
-	$(".time-before").html(function (index, value) {
-		$(this).attr('title', moment(value, "YYYY-MM-DD HH:mm:ss").format('D.MMMM YYYY HH:mm'));
-		return moment(value, "YYYY-MM-DD HH:mm:ss").from();
-	});
 });
