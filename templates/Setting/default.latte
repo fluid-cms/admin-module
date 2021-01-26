@@ -47,7 +47,7 @@
 
             <div class="tab-content">
                 {foreach $form->components as $module => $input}
-                    <div n:if="$input instanceof Nette\Forms\Container" id="{$module}" n:class="'tab-pane', isset($activeModule) ? ($module|lower) == $activeModule : $iterator->isFirst() ? 'in active'">
+                    <div n:if="$input instanceof Nette\Forms\Container" id="{$module}" n:class="'tab-pane', isset($activeModule) ? ($module|lower) == $activeModule : ($iterator->isFirst() ? 'in active')">
                         {if isset($form[$module])}
                             <div class="table-responsive">
                                 <table class="table table-hover table-responsive table-middle">
