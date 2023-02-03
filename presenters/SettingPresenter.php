@@ -100,7 +100,7 @@ class SettingPresenter extends BasePresenter
 		$form->addSubmit("save", "Uložit nastavení")
 			->onClick[] = function (SubmitButton $button) use ($parameters) {
 				$redirectRequired = false;
-				foreach (call_user_func_array('array_merge', $button->getForm()->getValues(true)) as $var => $value) {
+				foreach (call_user_func_array('array_merge', array_values($button->getForm()->getValues(true))) as $var => $value) {
 					$tid = str_replace("_", ".", $var);
 					if (array_key_exists($tid, $parameters)) {
 						if (!$parameters[$tid]->secured || $value !== $this->setting->getVal($tid)) {
