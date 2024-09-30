@@ -39,12 +39,13 @@ class UserAuthenticator implements Nette\Security\IAuthenticator
 
 		/** @var ActiveRow $row */
 		$row = $this->model->getTableSelection()->where(self::COLUMN_NAME, $email)->fetch();
+		$passwords = new Nette\Security\Passwords();
 
-		if (!$row || !Passwords::verify($password, $row[self::COLUMN_PASSWORD_HASH])) {
+		if (!$row || !$passwords->verify($password, $row[self::COLUMN_PASSWORD_HASH])) {
 			throw new Nette\Security\AuthenticationException('Špatné přihlašovací údaje', self::INVALID_CREDENTIAL);
-		} elseif (Passwords::needsRehash($row[self::COLUMN_PASSWORD_HASH])) {
+		} elseif ($passwords->needsRehash($row[self::COLUMN_PASSWORD_HASH])) {
 			$row->update(array(
-				self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
+				self::COLUMN_PASSWORD_HASH => $passwords->hash($password),
 			));
 		}
 
