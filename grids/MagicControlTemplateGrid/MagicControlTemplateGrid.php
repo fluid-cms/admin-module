@@ -9,7 +9,7 @@ use Nette\Database\Table\ActiveRow;
 class MagicControlTemplateGrid extends FluidGrid
 {
 
-	protected function build()
+	protected function build(): void
 	{
 		$this->skipColumns(['source']);
 		$this->addRowAction("edit", "Upravit", [$this, 'editMenu']);
