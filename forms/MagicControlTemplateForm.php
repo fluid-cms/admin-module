@@ -91,7 +91,7 @@ class MagicControlTemplateForm extends FluidForm
 	 */
 	protected function submit(Control $control, Form $form)
 	{
-		$values                    = $form->getValues(true);
+		$values                    = $form->getValues('array');
 		$containUnauthorizedMacro = [];
 
 		foreach (self::$UNAUTHORIZED_MACROS as $unauthorizedMacro) {

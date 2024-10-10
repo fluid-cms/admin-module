@@ -60,7 +60,7 @@
                                     <tbody>
                                     <tr n:foreach="$form[$module]->components as $name => $subinput" n:class="$subinput->hasErrors() ? warning, $subinput->caption == $focusElement ? success">
                                         <td style="width: 25%">
-                                            {label $subinput, class => "f-700 f-14"}
+                                            {label $subinput, class => "f-700 f-14" /}
 
                                             {ifset $subinput->control->attrs['data-secured']}
                                                 <i class="fa fa-key fa-fw" title="Hodnota je zašifrovaná"></i>

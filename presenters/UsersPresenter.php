@@ -61,7 +61,7 @@ class UsersPresenter extends BasePresenter
 
 	public function onFluidFormSuccess(FluidFormEvent $event)
 	{
-		$this->flashMessage("Uživatel " . ($event->getForm()->getValues(true)['id'] != "" ? "upraven" : "vytvořen"), "success");
+		$this->flashMessage("Uživatel " . ($event->getForm()->getValues('array')['id'] != "" ? "upraven" : "vytvořen"), "success");
 		$this->redirect(":Admin:Users:default");
 	}
 

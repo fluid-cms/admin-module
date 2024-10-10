@@ -16,7 +16,6 @@ class MenuControl extends Control
 
 	public function __construct($items = [])
 	{
-		parent::__construct();
 		$this->items = $items;
 	}
 

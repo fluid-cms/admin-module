@@ -23,7 +23,7 @@ class UserGrid extends FluidGrid
 	public $context;
 
 
-	protected function build()
+	protected function build(): void
 	{
 		$this->setItemsPerPage(15);
 		$this->addRowAction("delete", "Smazat", [$this, 'deleteUser']);

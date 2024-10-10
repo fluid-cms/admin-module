@@ -67,7 +67,7 @@ class UserCommand extends Command
 	}
 
 
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$question = $this->getHelper('question');
 
@@ -105,6 +105,8 @@ class UserCommand extends Command
 		]);
 
 		$output->writeln(sprintf('<info>Pridan uzivatel "%s" s e-mailem "%s"</info>', $name, $email));
+
+		return Command::SUCCESS;
 	}
 
 }

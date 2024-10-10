@@ -15,7 +15,7 @@ class UserAuthorizator implements IAuthorizator
 	 * @param string $privilege - Pouze pro zachování kompatibility s Nette\Security\User
 	 * @return bool - zda-li ma pristup do predane sekce
 	 */
-	function isAllowed($role, $resource, $privilege)
+	function isAllowed(?string $role, ?string $resource, ?string $privilege): bool
 	{
 		return $role == "admin" || $role == $resource;
 	}

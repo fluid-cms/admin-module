@@ -29,7 +29,6 @@ class ComponentListControl extends Control
 
 	public function __construct(Creator $magicControlCreator, ScriptCollector $scriptCollector)
 	{
-		parent::__construct();
 		$this->magicControlCreator = $magicControlCreator;
 		$this->scriptCollector = $scriptCollector;
 	}
