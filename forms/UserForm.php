@@ -98,7 +98,7 @@ class UserForm extends FluidForm
 
 	protected function submit(Control $control, Form $form)
 	{
-		$values = $form->getValues(true);
+		$values = $form->getValues('array');
 
 		if ($values['id'] == "" && $values['password'] == "") {
 			$form->addError("Musíte zadat heslo");
