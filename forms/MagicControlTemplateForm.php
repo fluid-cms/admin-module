@@ -114,7 +114,7 @@ class MagicControlTemplateForm extends FluidForm
 				$this->templatesModel->update($values, $values['id']);
 				$this->templateCacheService->clearCache($values['magic_control'], $values['template_name']);
 			} else {
-				$this->createdId = $this->templatesModel->insert($values);
+				$this->createdId = $this->templatesModel->insert($values)->id;
 			}
 		} catch (UniqueConstraintViolationException $e) {
 			$form->addError('Šablona s tímto názvem pro tuto komponentu již existuje');
