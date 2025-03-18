@@ -22,7 +22,7 @@
                         {php $class = null}
 
                         {if empty($form->getErrors())}
-                            {if ($focusElement && isset($input[str_replace(".", "_", $focusElement)])) || $showTab == ($module|lower)}
+                            {if ($focusElement && isset($input[str_replace(".", "_", $focusElement)])) || $showTab == (strtolower($module))}
                                 {* pokud nema formular chyby, pak nas zajimaji parametry *}
                                 {php $class = "active"}
                             {elseif $iterator->isFirst() && !($focusElement || $showTab)}
@@ -37,7 +37,7 @@
                         {/if}
 
                         {if $class}
-                            {php $activeModule = ($module|lower)}
+                            {php $activeModule = strtolower($module)}
                         {/if}
 
                         <li class="{$class}"><a data-toggle="tab" href="#{$module}">{$module}</a></li>
@@ -47,7 +47,7 @@
 
             <div class="tab-content">
                 {foreach $form->components as $module => $input}
-                    <div n:if="$input instanceof Nette\Forms\Container" id="{$module}" n:class="'tab-pane', isset($activeModule) ? ($module|lower) == $activeModule : ($iterator->isFirst() ? 'in active')">
+                    <div n:if="$input instanceof Nette\Forms\Container" id="{$module}" n:class="'tab-pane', isset($activeModule) ? strtolower($module) == $activeModule : ($iterator->isFirst() ? 'in active')">
                         {if isset($form[$module])}
                             <div class="table-responsive">
                                 <table class="table table-hover table-responsive table-middle">
