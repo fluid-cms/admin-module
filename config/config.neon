@@ -55,7 +55,7 @@ fluid:
 			authenticator: Grapesc\GrapeFluid\AdminModule\Services\UserAuthenticator
 			authorizator: Grapesc\GrapeFluid\AdminModule\Services\UserAuthorizator
 
-assets:
+fluidAssets:
 	admin:
 		limit:
 			- ':Admin:.*'
